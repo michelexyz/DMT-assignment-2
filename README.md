@@ -1,2 +1,2 @@
-# DMT-assigment-2
-Assigment 2 for the Data Mining Techniques course at Vrije Universiteit
+# DMT-assignment-2
+Assignment 2 for the Data Mining Techniques course at Vrije Universiteit
