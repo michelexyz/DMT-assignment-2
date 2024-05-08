@@ -24,5 +24,5 @@ for column in df.columns:
 
 df_stats = pd.concat(stats, axis=1).T
 
-stats_path = f"stats_and_graphs/stats/{train_path.split('/')[1][:-4]}_stats.csv"
+stats_path = f"stats/{train_path.split('/')[1][:-4]}_stats.csv"
 df_stats.to_csv(stats_path)
