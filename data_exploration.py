@@ -26,3 +26,21 @@ df_stats = pd.concat(stats, axis=1).T
 
 stats_path = f"stats/{train_path.split('/')[1][:-4]}_stats.csv"
 df_stats.to_csv(stats_path)
+
+def stats_booked_rows():
+    chunk = pd.read_csv(train_path, chunksize=1000000)
+    print(f"load chunk: {time.time() - start_time:.2f}s")
+
+    start_time = time.time()
+    df = pd.concat(chunk)
+    print(f"concat df: {time.time() - start_time:.2f}s")
+    temp_df = df[df.booking_bool == 1]
+    stats = []
+    for column in temp_df.colums:
+        stats.append(temp_df[column].describe())
+    df_stats = pd.concat(stats, axis=1)
+
+    stats_path = f"stats_and_graphs/stats/{train_path.split('/')[1][:-4]}_stats_booked_rows.csv"
+    df_stats.to_csv(stats_path)    
+
+
