@@ -5,3 +5,5 @@ data
 *.idea
 __pycache__
 .DS_Store
+stats/aggregated_comp_stats.csv
+kaggle_predictions/lambdamart_predictions.csv
