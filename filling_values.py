@@ -44,6 +44,21 @@ def aggregate_comp(df):
 
     assert df["comp_inv_agg"].isna().sum() == 0, "There are still missing values in the comp_inv_agg column"
 
+    competitors = 8
+
+    for i in range(1, competitors+1):
+        # boolean representing if the rate or inv are missing for each competitor on each row
+        missing_value = df[f"comp{i}_rate"].isna() | df[f"comp{i}_inv"].isna()
+
+        # add to a new column
+        df[f"comp{i}_missing"] = missing_value
+
+        
+    # assert that the type of the new columns is boolean
+    assert df["comp1_missing"].dtype == bool, "The type of the comp1_missing column is not boolean"
+
+    
+
 
     df.drop(['comp1_rate','comp1_inv','comp1_rate_percent_diff','comp2_rate','comp2_inv','comp2_rate_percent_diff','comp3_rate','comp3_inv','comp3_rate_percent_diff','comp4_rate','comp4_inv','comp4_rate_percent_diff','comp5_rate','comp5_inv','comp5_rate_percent_diff','comp6_rate','comp6_inv','comp6_rate_percent_diff','comp7_rate','comp7_inv','comp7_rate_percent_diff','comp8_rate','comp8_inv','comp8_rate_percent_diff'],axis=1, inplace=True)
 
@@ -68,6 +83,9 @@ class VisitorHistFiller:
         self.country_means = None
 
     def fit_transform(self, df):
+        
+        df = VisitorHistFiller.save_missing_values(df)
+
         # Drop 'visitor_hist_starrating' column if exists
         if 'visitor_hist_starrating' in df.columns:
             df = df.drop(['visitor_hist_starrating'], axis=1)
@@ -104,6 +122,7 @@ class VisitorHistFiller:
     def transform(self, df_test):
         # Fill missing values by country mean, using the means from the training data
 
+        df_test = VisitorHistFiller.save_missing_values(df_test)
         if 'visitor_hist_starrating' in df_test.columns:
             df_test = df_test.drop(['visitor_hist_starrating'], axis=1)
             print("dropped visitor_hist_starrating column")
@@ -137,6 +156,14 @@ class VisitorHistFiller:
         # No return needed, modifications are done in-place
         return df_test
     
+    # class method to save the information on the missing values before removing them
+    @classmethod
+    def save_missing_values(cls, df):
+        # Save the indices of missing values
+        missing_indices = df["visitor_hist_adr_usd"].isna()
+        df["missing_visitor_hist_adr_usd"] = missing_indices
+        return df
+    
 
 class PropReviewScoreFiller:
     """
@@ -158,6 +185,8 @@ class PropReviewScoreFiller:
         self.global_mean = None
 
     def fit_transform(self, df):
+
+        df = PropReviewScoreFiller.save_missing_values(df)
         # Print the initial count of missing values
         prop_review_missing = df["prop_review_score"].isna().sum()
         print(f"The number of missing values for prop_review_score is {prop_review_missing}")
@@ -197,6 +226,8 @@ class PropReviewScoreFiller:
         return df
 
     def transform(self, df_test):
+        df_test = PropReviewScoreFiller.save_missing_values(df_test)
+
         # Fill missing review scores based on property ID
         print(f"The number of missing values for prop_review_score is {df_test['prop_review_score'].isna().sum()}")
         # if self.prop_id_means is not None:
@@ -229,6 +260,13 @@ class PropReviewScoreFiller:
 
         return df_test
     
+    @classmethod
+    def save_missing_values(cls, df):
+        # Save the indices of missing values
+        missing_indices = df["prop_review_score"].isna()
+        df["missing_prop_review_score"] = missing_indices
+        return df
+    
 
 class DestinationDistanceFiller:
     """
@@ -255,6 +293,8 @@ class DestinationDistanceFiller:
         self.means_by_prop_id = None
 
     def fit_transform(self, df):
+        df = DestinationDistanceFiller.save_missing_values(df)
+
         # Calculate the global mean
         self.global_mean = df["orig_destination_distance"].mean()
 
@@ -294,6 +334,8 @@ class DestinationDistanceFiller:
         return df
 
     def transform(self, df_test):
+        df_test = DestinationDistanceFiller.save_missing_values(df_test)
+
         # Fill by visitor_location_country_id and srch_destination_id
         print(f"The number of missing values for orig_destination_distance is {df_test['orig_destination_distance'].isna().sum()}")
         if self.means_by_country_destination is not None:
@@ -343,6 +385,14 @@ class DestinationDistanceFiller:
         assert final_missing == 0, "There are still missing values in the orig_destination_distance column"
 
         return df_test
+    
+    @classmethod
+
+    def save_missing_values(cls, df):
+        # Save the indices of missing values
+        missing_indices = df["orig_destination_distance"].isna()
+        df["missing_orig_destination_distance"] = missing_indices
+        return df
 
 
 class QueryAffinityFiller:
@@ -360,8 +410,11 @@ class QueryAffinityFiller:
     def __init__(self):
         self.alpha = None
         self.beta = None
+        self.loc = 0
 
     def fit_transform(self, df):
+
+        df = QueryAffinityFiller.save_missing_values(df)
         # number of missing values
         total_missing = df["srch_query_affinity_score"].isna().sum()
 
@@ -371,9 +424,9 @@ class QueryAffinityFiller:
         print("data converted to positive values")
 
         # Step 2: Fit a gamma distribution to the positive data
-        self.alpha, loc, self.beta = gamma.fit(positive_data)  # We fix the location to 0 for simplicity
+        self.alpha, self.loc, self.beta = gamma.fit(positive_data)  # We fix the location to 0 for simplicity
 
-        print(f"alpha: {self.alpha}, loc: {loc}, beta: {self.beta}")
+        print(f"alpha: {self.alpha}, loc: {self.loc}, beta: {self.beta}")
 
         # # Compute new mean (e.g., targeting the first percentile as new mean)
         target_mean = np.percentile(positive_data, 99)  # Assuming positive_data exists
@@ -382,7 +435,7 @@ class QueryAffinityFiller:
         self.alpha = target_mean / self.beta
 
         # convert to negative and to a pandas series
-        sampled_data = -pd.Series(gamma.rvs(self.alpha, scale=self.beta, size=total_missing))
+        sampled_data = -pd.Series(gamma.rvs(self.alpha, scale=self.beta, loc= self.loc, size=total_missing))
 
         print(f"the number of sampled values is {sampled_data.shape[0]}")
         print(f"the number of missing values is {df['srch_query_affinity_score'].isna().sum()}")
@@ -395,11 +448,13 @@ class QueryAffinityFiller:
     
     def transform(self, df_test):
 
+        df_test = QueryAffinityFiller.save_missing_values(df_test)
+
         # number of missing values
         total_missing = df_test["srch_query_affinity_score"].isna().sum()
 
         print(f"the number of missing values for srch_query_affinity_score is {total_missing}")
-        sampled_data = -pd.Series(gamma.rvs(self.alpha, scale=self.beta, size=total_missing))
+        sampled_data = -pd.Series(gamma.rvs(self.alpha, scale=self.beta, loc= self.loc, size=total_missing))
         
         print(f"the number of missing values in the sampled data is {sampled_data.isna().sum()}")
         missing_indices = df_test["srch_query_affinity_score"].isna()
@@ -411,6 +466,13 @@ class QueryAffinityFiller:
         assert missing_values == 0, f"There are still {missing_values} missing values in the srch_query_affinity_score column"
 
         return df_test
+    
+    @classmethod
+    def save_missing_values(cls, df):
+        # Save the indices of missing values
+        missing_indices = df["srch_query_affinity_score"].isna()
+        df["missing_srch_query_affinity_score"] = missing_indices
+        return df
 
 
 class LocationScoreFiller:
@@ -434,6 +496,8 @@ class LocationScoreFiller:
         self.linear_model = None
 
     def fit_transform(self, df):
+
+        df = LocationScoreFiller.save_missing_values(df)
 
         no_missing_df = df.dropna(subset=["prop_location_score2"])
 
@@ -487,6 +551,8 @@ class LocationScoreFiller:
         return df
     
     def transform(self, df_test):
+
+        df_test = LocationScoreFiller.save_missing_values(df_test)
             
         # Select rows with missing values
         missing_indices = df_test["prop_location_score2"].isna()
@@ -506,6 +572,13 @@ class LocationScoreFiller:
         assert missing_values == 0, f"There are still {missing_values} missing values in the prop_location_score2 column"
 
         return df_test
+    
+    @classmethod
+    def save_missing_values(cls, df):
+        # Save the indices of missing values
+        missing_indices = df["prop_location_score2"].isna()
+        df["missing_prop_location_score2"] = missing_indices
+        return df
           
     
 # a class to run all the classes above in sequence with a fit_transform and transform method
@@ -585,5 +658,5 @@ class MissingValuesFiller:
 
         print("transform process completed.")
         return df_test
-
+    
 
