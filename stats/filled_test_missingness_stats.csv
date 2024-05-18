@@ -1,0 +1,6 @@
+,srch_id,date_time,site_id,visitor_location_country_id,visitor_hist_adr_usd,prop_country_id,prop_id,prop_starrating,prop_review_score,prop_brand_bool,prop_location_score1,prop_location_score2,prop_log_historical_price,price_usd,promotion_flag,srch_destination_id,srch_length_of_stay,srch_booking_window,srch_adults_count,srch_children_count,srch_room_count,srch_saturday_night_bool,srch_query_affinity_score,orig_destination_distance,random_bool,comp_rate_agg,comp_inv_agg
+missing_values,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+count,4959183,4959183,4959183,4959183,4959183,4959183,4959183,4959183,4959183,4959183,4959183,4959183,4959183,4959183,4959183,4959183,4959183,4959183,4959183,4959183,4959183,4959183,4959183,4959183,4959183,4959183,4959183
+n_unique,199549,198338,34,210,7959,167,129438,6,16,2,337,966572,391,76538,2,18049,38,410,9,10,8,2,4842812,541544,2,13,24
+uniqueness_factor,3.21,3.22,11.89,10.07,6.43,10.3,3.65,13.62,12.64,14.72,9.6,1.64,9.45,4.17,14.72,5.62,11.78,9.4,13.22,13.11,13.34,14.72,0.02,2.21,14.72,12.85,12.24
+percentage_missing,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
