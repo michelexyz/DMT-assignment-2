@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-05-24T11:21:58.402Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="kGuHANwWxbNyonaRNYqw" version="24.4.7" type="github">
+<mxfile host="app.diagrams.net" modified="2024-05-24T11:28:23.906Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="AnA9-XqEcSTDmtIM0jwM" version="24.4.7" type="github">
   <diagram name="Pagina-1" id="1Sx2HtF8FY1GfCiwfAgX">
-    <mxGraphModel dx="977" dy="620" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="622" dy="395" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -10,7 +10,7 @@
         <mxCell id="Wt18oZRauNb69VZFHdwb-3" value="" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="Wt18oZRauNb69VZFHdwb-11">
           <mxGeometry width="120" height="170" as="geometry" />
         </mxCell>
-        <mxCell id="Wt18oZRauNb69VZFHdwb-2" value="&lt;b&gt;Raw data&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="Wt18oZRauNb69VZFHdwb-11">
+        <mxCell id="Wt18oZRauNb69VZFHdwb-2" value="&lt;b style=&quot;border-color: var(--border-color);&quot;&gt;Raw data&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="Wt18oZRauNb69VZFHdwb-11">
           <mxGeometry x="20" width="80" height="30" as="geometry" />
         </mxCell>
         <mxCell id="Wt18oZRauNb69VZFHdwb-1" value="Train set" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="Wt18oZRauNb69VZFHdwb-11">
@@ -18,9 +18,6 @@
         </mxCell>
         <mxCell id="Wt18oZRauNb69VZFHdwb-12" value="Test set" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="Wt18oZRauNb69VZFHdwb-11">
           <mxGeometry x="17.5" y="100" width="85" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="Wt18oZRauNb69VZFHdwb-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Wt18oZRauNb69VZFHdwb-13" target="Wt18oZRauNb69VZFHdwb-47">
-          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="Wt18oZRauNb69VZFHdwb-51" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" edge="1" parent="1" source="Wt18oZRauNb69VZFHdwb-13">
           <mxGeometry relative="1" as="geometry">
@@ -77,16 +74,49 @@
             <mxPoint x="-6" y="2" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Wt18oZRauNb69VZFHdwb-47" value="Filled train" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="450" y="280" width="85" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="Wt18oZRauNb69VZFHdwb-48" value="Filled test" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="450" y="350" width="85" height="40" as="geometry" />
+        <mxCell id="Wt18oZRauNb69VZFHdwb-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Wt18oZRauNb69VZFHdwb-13" target="Wt18oZRauNb69VZFHdwb-47">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="Wt18oZRauNb69VZFHdwb-50" value="Fill using fitted models" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Wt18oZRauNb69VZFHdwb-12" target="Wt18oZRauNb69VZFHdwb-48">
           <mxGeometry x="0.028" y="-10" relative="1" as="geometry">
             <mxPoint as="offset" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="Wt18oZRauNb69VZFHdwb-56" value="" style="endArrow=none;html=1;rounded=0;entryX=1.004;entryY=0.127;entryDx=0;entryDy=0;entryPerimeter=0;exitX=-0.004;exitY=0.124;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="435.544" y="264.84" as="sourcePoint" />
+            <mxPoint x="550.456" y="265.32" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Wt18oZRauNb69VZFHdwb-58" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="436" y="238" width="114" height="162" as="geometry" />
+        </mxCell>
+        <mxCell id="Wt18oZRauNb69VZFHdwb-52" value="" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;" vertex="1" parent="Wt18oZRauNb69VZFHdwb-58">
+          <mxGeometry y="2" width="114" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="Wt18oZRauNb69VZFHdwb-47" value="Filled train" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="Wt18oZRauNb69VZFHdwb-58">
+          <mxGeometry x="14" y="42" width="85" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Wt18oZRauNb69VZFHdwb-48" value="Filled test" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="Wt18oZRauNb69VZFHdwb-58">
+          <mxGeometry x="14" y="112" width="85" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Wt18oZRauNb69VZFHdwb-57" value="&lt;b style=&quot;border-color: var(--border-color);&quot;&gt;Filled data&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="Wt18oZRauNb69VZFHdwb-58">
+          <mxGeometry x="17" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Wt18oZRauNb69VZFHdwb-59" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="80" y="570" width="114" height="162" as="geometry" />
+        </mxCell>
+        <mxCell id="Wt18oZRauNb69VZFHdwb-60" value="" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;" vertex="1" parent="Wt18oZRauNb69VZFHdwb-59">
+          <mxGeometry y="2" width="114" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="Wt18oZRauNb69VZFHdwb-61" value="Filled train" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="Wt18oZRauNb69VZFHdwb-59">
+          <mxGeometry x="14" y="42" width="85" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Wt18oZRauNb69VZFHdwb-62" value="Filled test" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="Wt18oZRauNb69VZFHdwb-59">
+          <mxGeometry x="14" y="112" width="85" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Wt18oZRauNb69VZFHdwb-63" value="&lt;b style=&quot;border-color: var(--border-color);&quot;&gt;Filled data&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="Wt18oZRauNb69VZFHdwb-59">
+          <mxGeometry x="17" width="80" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
